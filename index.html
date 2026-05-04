@@ -292,7 +292,7 @@
           playButton.classList.remove("is-playing");
         }
       } catch (error) {
-        alert("Audio file not found. Make sure the file exists at assets/music/fear.mp3");
+        alert("Audio file not found. Make sure the file exists at music/fear.mp3");
       }
     }
 
@@ -324,7 +324,7 @@
     });
 
     audio.addEventListener("error", () => {
-      console.error("Audio failed to load. Check path: assets/music/fear 111.mp3");
+      console.error("Audio failed to load. Check path: music/fear 111.mp3");
     });
 
     playButton.addEventListener("click", togglePlay);
