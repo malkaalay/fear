@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FEAR - Hicats Sam | HS</title>
+
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
@@ -125,8 +126,8 @@
       opacity:.62;transform-origin:center;animation:calmWave 3.6s ease-in-out infinite;animation-delay:var(--d);
     }
     @keyframes calmWave{0%,100%{transform:scaleY(.78);opacity:.46}50%{transform:scaleY(1.05);opacity:.72}}
-    .progress-line{width:100%;height:4px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden}
-    .progress-fill{width:0%;height:100%;background:#cfcfcf;border-radius:inherit;transition:width .2s linear}
+    .progress-line{width:100%;height:4px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;cursor:pointer}
+    .progress-fill{width:0%;height:100%;background:#cfcfcf;border-radius:inherit;transition:width .1s linear}
     .time-row{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.2px}
     .presave,.music-link{
       width:100%;min-height:68px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;
@@ -148,24 +149,29 @@
     }
   </style>
 </head>
+
 <body>
   <main class="page">
     <header class="header">
       <div class="brand">
         <div class="logo">HS</div>
-        <div><h3>HICATS SAM</h3><small>Official dark release page</small></div>
+        <div>
+          <h3>HICATS SAM</h3>
+          <small>Official dark release page</small>
+        </div>
       </div>
+
       <button class="share-btn" onclick="sharePage()">SHARE</button>
     </header>
 
     <section class="content">
       <div class="artist-card">
         <div class="artist-photo-wrap">
-          <img class="artist-photo" src="images/artist.png" alt="Hicats Sam artist photo" />
+          <img class="artist-photo" src="images/artist.png" alt="Hicats Sam artist photo">
         </div>
 
         <div class="cover-wrap">
-          <img class="cover" src="images/fear-artwork.jpeg" alt="FEAR artwork by Hicats Sam" />
+          <img class="cover" src="images/fear-artwork.jpeg" alt="FEAR artwork by Hicats Sam">
         </div>
 
         <div class="label">Dark Cinematic Single</div>
@@ -175,10 +181,17 @@
       </div>
 
       <div class="player">
-        <div class="play-area"><button class="play-button" id="playButton" aria-label="Play preview"></button></div>
+        <div class="play-area">
+          <button class="play-button" id="playButton" aria-label="Play preview"></button>
+        </div>
+
         <div class="wave-panel">
-          <div class="wave-top"><span class="wave-title">Preview: FEAR</span><span>Audio preview</span></div>
-          <div class="waveform" onclick="fakeSeek(event)">
+          <div class="wave-top">
+            <span class="wave-title">Preview: FEAR</span>
+            <span>Audio preview</span>
+          </div>
+
+          <div class="waveform" id="waveform">
             <span class="bar" style="--h:14px;--d:.0s"></span><span class="bar" style="--h:22px;--d:.1s"></span>
             <span class="bar" style="--h:18px;--d:.2s"></span><span class="bar" style="--h:30px;--d:.3s"></span>
             <span class="bar" style="--h:20px;--d:.4s"></span><span class="bar" style="--h:26px;--d:.5s"></span>
@@ -193,39 +206,130 @@
             <span class="bar" style="--h:17px;--d:2.2s"></span><span class="bar" style="--h:29px;--d:2.3s"></span>
             <span class="bar" style="--h:20px;--d:2.4s"></span><span class="bar" style="--h:33px;--d:2.5s"></span>
           </div>
-          <div class="progress-line"><div class="progress-fill" id="progressFill"></div></div>
-          <div class="time-row"><span id="currentTime">0:00</span><span>4:04</span></div>
+
+          <div class="progress-line" id="progressLine">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="time-row">
+            <span id="currentTime">0:00</span>
+            <span id="durationTime">0:00</span>
+          </div>
         </div>
       </div>
 
-      <a class="presave" href="#"><span>Spotify Pre-Save <small>Save the track before release</small></span><span class="arrow">→</span></a>
-      <a class="music-link" href="#"><span>Spotify <small>Coming soon</small></span><span class="arrow">→</span></a>
-      <a class="music-link" href="#"><span>Apple Music <small>Coming soon</small></span><span class="arrow">→</span></a>
-      <a class="music-link" href="https://www.instagram.com/hsrealmusic?igsh=cXA3dmszcm4ybGd4"><span>Instagram <small>Coming soon</small></span><span class="arrow">→</span></a>
-      <a class="music-link" href="https://www.tiktok.com/@hsrealmusic?_r=1&_t=ZS-9653AmsCTu4"><span>TikTok <small>Coming soon</small></span><span class="arrow">→</span></a>
+      <audio id="audioPlayer" preload="metadata">
+        <source src="assets/audio/fear.mp3" type="audio/mpeg">
+      </audio>
+
+      <a class="presave" href="#">
+        <span>Spotify Pre-Save <small>Save the track before release</small></span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="music-link" href="#">
+        <span>Spotify <small>Coming soon</small></span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="music-link" href="#">
+        <span>Apple Music <small>Coming soon</small></span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="music-link" href="https://www.instagram.com/hsrealmusic?igsh=cXA3dmszcm4ybGd4">
+        <span>Instagram <small>Coming soon</small></span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="music-link" href="https://www.tiktok.com/@hsrealmusic?_r=1&_t=ZS-9653AmsCTu4">
+        <span>TikTok <small>Coming soon</small></span>
+        <span class="arrow">→</span>
+      </a>
     </section>
 
     <footer>© 2026 Hicats Sam / HS — FEAR</footer>
   </main>
 
   <script>
-    const playButton=document.getElementById('playButton');
-    const progressFill=document.getElementById('progressFill');
-    const currentTime=document.getElementById('currentTime');
-    const duration=244;let current=0;let isPlaying=false;let timer=null;
-    function formatTime(seconds){const m=Math.floor(seconds/60);const s=Math.floor(seconds%60).toString().padStart(2,'0');return `${m}:${s}`}
-    function updatePlayer(){progressFill.style.width=`${(current/duration)*100}%`;currentTime.textContent=formatTime(current)}
-    function togglePlay(){
-      isPlaying=!isPlaying;playButton.classList.toggle('is-playing',isPlaying);
-      if(isPlaying){timer=setInterval(()=>{current+=1;if(current>=duration){current=0;isPlaying=false;playButton.classList.remove('is-playing');clearInterval(timer)}updatePlayer()},1000)}
-      else{clearInterval(timer)}
+    const audio = document.getElementById("audioPlayer");
+    const playButton = document.getElementById("playButton");
+    const progressFill = document.getElementById("progressFill");
+    const progressLine = document.getElementById("progressLine");
+    const waveform = document.getElementById("waveform");
+    const currentTime = document.getElementById("currentTime");
+    const durationTime = document.getElementById("durationTime");
+
+    function formatTime(seconds) {
+      if (!Number.isFinite(seconds)) return "0:00";
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60).toString().padStart(2, "0");
+      return `${m}:${s}`;
     }
-    function fakeSeek(event){const rect=event.currentTarget.getBoundingClientRect();const ratio=Math.min(Math.max((event.clientX-rect.left)/rect.width,0),1);current=Math.floor(ratio*duration);updatePlayer()}
-    async function sharePage(){
-      const data={title:'FEAR - Hicats Sam',text:'Listen to FEAR by Hicats Sam / HS',url:window.location.href};
-      if(navigator.share){await navigator.share(data)}else{await navigator.clipboard.writeText(window.location.href);alert('Link copied')}
+
+    function updateProgress() {
+      if (!audio.duration) return;
+      const progress = (audio.currentTime / audio.duration) * 100;
+      progressFill.style.width = `${progress}%`;
+      currentTime.textContent = formatTime(audio.currentTime);
     }
-    playButton.addEventListener('click',togglePlay);updatePlayer();
+
+    function seekAudio(event) {
+      if (!audio.duration) return;
+      const rect = event.currentTarget.getBoundingClientRect();
+      const ratio = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1);
+      audio.currentTime = ratio * audio.duration;
+      updateProgress();
+    }
+
+    async function togglePlay() {
+      try {
+        if (audio.paused) {
+          await audio.play();
+          playButton.classList.add("is-playing");
+        } else {
+          audio.pause();
+          playButton.classList.remove("is-playing");
+        }
+      } catch (error) {
+        alert("Audio file not found. Make sure the file exists at assets/music/fear.mp3");
+      }
+    }
+
+    async function sharePage() {
+      const data = {
+        title: "FEAR - Hicats Sam",
+        text: "Listen to FEAR by Hicats Sam / HS",
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        await navigator.share(data);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        alert("Link copied");
+      }
+    }
+
+    audio.addEventListener("loadedmetadata", () => {
+      durationTime.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener("timeupdate", updateProgress);
+
+    audio.addEventListener("ended", () => {
+      playButton.classList.remove("is-playing");
+      progressFill.style.width = "0%";
+      currentTime.textContent = "0:00";
+    });
+
+    audio.addEventListener("error", () => {
+      console.error("Audio failed to load. Check path: assets/audio/fear.mp3");
+    });
+
+    playButton.addEventListener("click", togglePlay);
+    progressLine.addEventListener("click", seekAudio);
+    waveform.addEventListener("click", seekAudio);
   </script>
 </body>
 </html>
