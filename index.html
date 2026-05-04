@@ -221,7 +221,7 @@
       </div>
 
       <audio id="audioPlayer" preload="metadata">
-         <source src="music/fear111.mp3" type="audio/mp3">
+         <source src="music/Fear.mp3" type="audio/mp3">
       </audio>
 
       <a class="presave" href="#">
@@ -294,7 +294,7 @@
           playButton.classList.remove("is-playing");
         }
       } catch (error) {
-        alert("Audio file not found. Make sure the file exists at music/fear.mp3");
+        alert("Audio file not found. Make sure the file exists at music/Fear.mp3");
       }
     }
 
@@ -326,7 +326,7 @@
     });
 
     audio.addEventListener("error", () => {
-      console.error("Audio failed to load. Check path: music/fear 111.mp3");
+      console.error("Audio failed to load. Check path: music/Fear.mp3");
     });
 
     playButton.addEventListener("click", togglePlay);
